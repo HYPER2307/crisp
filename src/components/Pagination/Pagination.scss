@@ -1,0 +1,37 @@
+@import '../../styles/utils';
+
+.pagination {
+  &__sort-params {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(150px, 1fr));
+    gap: 40px 16px;
+    justify-items: center;
+    margin-bottom: 40px;
+
+    @include on-desktop-s {
+      grid-template-columns: repeat(3, minmax(150px, 1fr));
+
+    }
+
+    @include on-tablet {
+      grid-template-columns: repeat(2, minmax(150px, 1fr));
+    }
+
+    @include on-phone {
+      grid-template-columns: repeat(1, minmax(150px, 1fr));
+    }
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+}

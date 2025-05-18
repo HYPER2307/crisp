@@ -1,0 +1,105 @@
+@import "../../styles/utils";
+
+.slider {
+  position: relative;
+
+  &-container {
+    overflow: hidden;
+    max-width: 1040px;
+    margin-inline: auto;
+  }
+
+  &-wrapper {
+    position: relative;
+
+    @include on-phone {
+      margin-inline: -80px;
+    }
+  }
+
+  &-slide {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    padding-inline: 40px;
+    flex: 0 0 100%;
+
+    @include on-phone {
+      padding-bottom: 100%;
+    }
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+
+      @include on-phone {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+
+  &-btn {
+    position: absolute;
+    z-index: 10;
+    width: 32px;
+    height: 100%;
+    border: 1px solid $c-icons;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #fff;
+    transition: all 0.3s;
+
+    &:hover {
+      border: 1px solid $c-primary;
+    }
+
+    @include on-phone {
+      display: none;
+    }
+
+    path {
+      fill: $c-primary;
+    }
+
+    &-prev {
+      top: 0;
+      left: 0;
+    }
+
+    &-next {
+      top: 0;
+      right: 0;
+    }
+  }
+
+  &-dots {
+    position: absolute;
+    left: 50% !important;
+    bottom: -28px !important;
+    transform: translateX(-50%) !important;
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px !important;
+    height: 24px;
+  }
+
+  &-dot {
+    width: 14px;
+    height: 4px;
+    background-color: $c-elements;
+    border: none;
+    cursor: pointer;
+    display: block;
+
+    &--active {
+      background-color: $c-primary;
+    }
+  }
+}

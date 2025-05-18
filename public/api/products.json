@@ -1,0 +1,98 @@
+[
+  {
+    "id": "1",
+    "category": "plants",
+    "itemId": "vaz1",
+    "name": "Орхідея Фаленопсис",
+    "fullPrice": 550,
+    "price": 500,
+    "size": "medium",
+    "color": "white",
+    "year": 2024,
+    "image": "/img/plants/orcid.jpg"
+  },
+  {
+    "id": "2",
+    "category": "plants",
+    "itemId": "vaz2",
+    "name": "Фікус Бенджаміна",
+    "fullPrice": 620,
+    "price": 570,
+    "size": "large",
+    "color": "green",
+    "year": 2024,
+    "image": "/img/plants/fikys.jpg"
+  },
+  {
+    "id": "3",
+    "category": "plants",
+    "itemId": "vaz3",
+    "name": "Монстера Деліціоза",
+    "fullPrice": 720,
+    "price": 680,
+    "size": "large",
+    "color": "green",
+    "year": 2024,
+    "image": "/img/plants/monstera.png"
+  },
+  {
+    "id": "4",
+    "category": "plants",
+    "itemId": "vaz4",
+    "name": "Сансевієрія Лауренті",
+    "fullPrice": 430,
+    "price": 390,
+    "size": "medium",
+    "color": "striped",
+    "year": 2024,
+    "image": "/img/plants/sanseveria.png"
+  },
+  {
+    "id": "5",
+    "category": "plants",
+    "itemId": "vaz5",
+    "name": "Пахіра Акватика",
+    "fullPrice": 670,
+    "price": 620,
+    "size": "medium",
+    "color": "green",
+    "year": 2024,
+    "image": "/img/plants/pahira.jpeg"
+  },
+  {
+    "id": "6",
+    "category": "plants",
+    "itemId": "vaz6",
+    "name": "Спатифіллум",
+    "fullPrice": 490,
+    "price": 450,
+    "size": "small",
+    "color": "white",
+    "year": 2024,
+    "image": "/img/plants/spatufiliym.jpg"
+  },
+  {
+    "id": "7",
+    "category": "plants",
+    "itemId": "vaz7",
+    "name": "Антуріум Червоний",
+    "fullPrice": 530,
+    "price": 490,
+    "size": "small",
+    "color": "red",
+    "year": 2024,
+    "image": "/img/plants/vaz8.jpg"
+  },
+  {
+    "id": "8",
+    "category": "plants",
+    "itemId": "vaz8",
+    "name": "Кактус Мікс",
+    "fullPrice": 310,
+    "price": 280,
+    "size": "mini",
+    "color": "green",
+    "year": 2024,
+    "image": "/img/plants/1373_1.jpeg"
+  }
+]

@@ -1,0 +1,46 @@
+{
+	"id": "orchid-phalaenopsis-white-ceramic-12cm",
+	"namespaceId": "orchid-phalaenopsis",
+	"name": "Орхідея Phalaenopsis White у керамічному горщику 12 см",
+	"sizesAvailable": ["10cm", "12cm", "15cm"],
+	"size": "12cm",
+	"priceRegular": 450,
+	"priceDiscount": 400,
+	"colorsAvailable": ["білий", "зелений", "графіт"],
+	"potColor": "білий",
+	"images": [
+	  "img/plants/orchid-phalaenopsis/white/00.jpg",
+	  "img/plants/orchid-phalaenopsis/white/01.jpg",
+	  "img/plants/orchid-phalaenopsis/white/02.jpg"
+	],
+	"description": [
+	  {
+		"title": "Рослина",
+		"text": [
+		  "Чарівна фаленопсис з білими квітками, що цвітуть кілька разів на рік.",
+		  "Висота рослини з горщиком: приблизно 30–35 см."
+		]
+	  },
+	  {
+		"title": "Догляд",
+		"text": [
+		  "Світло: розсіяне, без прямих сонячних променів.",
+		  "Полив: раз на 7–10 днів, підливати воду під корінь, не допускаючи застою."
+		]
+	  },
+	  {
+		"title": "Горщик та субстрат",
+		"text": [
+		  "Горщик: біла кераміка, діаметром 12 см, з дренажними отворами.",
+		  "Субстрат: спеціальна суміш для орхідей на основі кори та вугілля."
+		]
+	  }
+	],
+	"lightRequirements": "розсіяне світло",
+	"waterRequirements": "помірний полив",
+	"bloomSeason": ["зима", "весна"],
+	"plantType": "Phalaenopsis",
+	"potMaterial": "кераміка",
+	"potDiameter": "12cm"
+  }
+  
