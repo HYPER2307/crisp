@@ -7,6 +7,8 @@ import { usePhones } from '../../hooks/usePhones';
 
 import './Header.scss';
 import { navLinks } from './constants';
+import { Search } from '../Search/Search';
+import { PATHNAMES } from '../../constants/routes';
 
 const getNavClass = ({ isActive }: { isActive: boolean }) => (cn('nav__link', {
   'nav__link--active': isActive,
@@ -19,6 +21,9 @@ const getIconClass = ({ isActive }: { isActive: boolean }) => (cn(
     'icon--active': isActive,
   },
 ));
+
+console.log(location.hash);
+
 
 export const Header: FC = () => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 640px)' });
@@ -52,6 +57,8 @@ export const Header: FC = () => {
       </div>
 
       <div className="header__wrapper">
+          <Search/>
+
         {!isTabletOrMobile && (
           <>
             <NavLink

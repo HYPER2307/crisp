@@ -1,11 +1,15 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { products } from './products/slice'
 import { currentProduct } from './currentProduct/slice'
+import { fertilizers } from './fertilizers/slice'
+import { currentFertilizer } from './currentFertilizer/slice'
 
 export const store = configureStore({
   reducer: combineReducers({
     products,
     currentProduct,
+    fertilizers,
+    currentFertilizer,
   })
 })
 

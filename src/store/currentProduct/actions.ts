@@ -8,7 +8,7 @@ export const getCurrentProductAsync = createAsyncThunk(
   `${CURRENT_PRODUCT_SLICE_NAME}/fetchCurrentProduct`,
   async ({ productId }: { productId: string }) => {
     try {
-      const { data } = await instance.get<ICurrentProductResponse>(`products/${productId}`)
+      const { data } = await instance.get<ICurrentProductResponse>(`products/${productId}?populate=*`)
 
       console.log(data);
       

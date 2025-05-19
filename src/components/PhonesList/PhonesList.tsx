@@ -3,9 +3,10 @@ import { v4 as getId } from 'uuid';
 
 import { ProductItem } from '../ProductItem/ProductItem';
 import { Product } from '../../types/Product';
+import { IFertilizer } from '../../types/Fertilizers';
 
 type Props = {
-  products: Product[],
+  products: Product[] | IFertilizer[],
 };
 
 export const PhonesList: React.FC<Props> = ({

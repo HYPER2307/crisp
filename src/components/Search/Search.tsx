@@ -1,24 +1,34 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-type Props = {
-  searchDirectory: string,
-  value: string,
-  changeValue: (event: React.ChangeEvent<HTMLInputElement>) => void,
-};
+export const Search= () => {
+  const [searchParams, setSearchParams] = useSearchParams();
 
-export const Search: React.FC<Props> = ({
-  searchDirectory,
-  value,
-  changeValue,
-}) => {
+  const searchValue = searchParams.get('search') || '';
+
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    const params = new URLSearchParams(searchParams);
+
+    if (!value) {
+      params.delete('search');
+    } else {
+      params.set('search', value);
+    }
+
+    setSearchParams(params);
+  };
+
   return (
     <div className="header__search">
       <input
         type="text"
         className="header__input"
-        placeholder={`Search in ${searchDirectory}...`}
-        value={value}
-        onChange={changeValue}
+        placeholder={`Пошук ...`}
+        value={searchValue}
+        onChange={handleInputChange}
       />
 
       <div className="icon icon--search">

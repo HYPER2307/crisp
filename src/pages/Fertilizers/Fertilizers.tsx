@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import './Plants.scss';
+import './Fertilizers.scss';
 import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
 import { usePhones } from '../../hooks/usePhones';
 import { Pagination } from '../../components/Pagination/Pagination';
@@ -12,8 +12,10 @@ import { PhonesList } from '../../components/PhonesList/PhonesList';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectProductsData } from '../../store/products/selectors';
 import { getProductsAsync } from '../../store/products/actions';
+import { selectFertilizersData } from '../../store/fertilizers/selectors';
+import { getFertilizersAsync } from '../../store/fertilizers/actions';
 
-export const Plants: React.FC = () => {
+export const Fertilizers: React.FC = () => {
   const {
     sortParams,
     perPageParams,
@@ -24,9 +26,9 @@ export const Plants: React.FC = () => {
   const [searchParams] = useSearchParams();
 
   const dispatch = useAppDispatch();
-  const productsData = useAppSelector(selectProductsData);
+  const fertilizersData = useAppSelector(selectFertilizersData);
 
-  const { data: products } = productsData ?? { data: [] };
+  const { data: products } = fertilizersData ?? { data: [] };
 
   const searchValue = searchParams.get('search') || '';
   const itemsPerPage = +(searchParams.get('perPage') || 32);
@@ -54,7 +56,7 @@ export const Plants: React.FC = () => {
 
   const filteredProducts = getSortedProducts()
     .filter(product =>
-      product.name.toLowerCase().includes(searchValue.toLowerCase()) && product.categoryId === 'plants'
+      product.name.toLowerCase().includes(searchValue.toLowerCase())
     );
 
   const productsLength = filteredProducts?.length;
@@ -63,17 +65,13 @@ export const Plants: React.FC = () => {
   const slicedProducts = filteredProducts?.slice(firstProductIndex, lastProductIndex);
 
   useEffect(() => {
-    // if (!products.length) {
-    //   setIsLoading(true);
-
-    //   client.get<Product[]>('products.json')
-    //     .then(setProducts)
-    //     .finally(() => setIsLoading(false));
-    // }
-    if (!products) {
-      dispatch(getProductsAsync());
+    if (!fertilizersData) {
+      dispatch(getFertilizersAsync());
     }
-  }, [products, setProducts, dispatch]);
+  }, [products, dispatch, fertilizersData]);
+
+  console.log(products);
+  
 
   return (
     <div className="plants">
@@ -82,10 +80,10 @@ export const Plants: React.FC = () => {
       {!isLoading && (
         <>
           <div className="plants__breadcrumbs">
-            <Breadcrumbs name='Вазони' />
+            <Breadcrumbs name='Добриво' />
           </div>
 
-          <h1 className="content__title">Вазони</h1>
+          <h1 className="content__title">Добриво</h1>
 
           <p className="plants__count">
             {`${productsLength} рослин знайдено`}

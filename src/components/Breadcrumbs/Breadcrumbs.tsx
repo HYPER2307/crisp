@@ -6,11 +6,18 @@ import cn from 'classnames';
 
 import './Breadcrumbs.scss';
 
-export const Breadcrumbs: React.FC = () => {
+interface Props {
+  name: string;
+  path: string;
+}
+
+export const Breadcrumbs: React.FC<Props> = ({ name }) => {
   const location = useLocation();
   const currentLocation = location.pathname.split('/').filter(path => (
     path !== ''
   ));
+
+  // currentLocation[currentLocation.length - 1] = name
 
   let localPath = '';
 
@@ -20,12 +27,37 @@ export const Breadcrumbs: React.FC = () => {
         <img src="img/icons/home.svg" alt="Home" />
       </Link>
 
-      {currentLocation.map(path => {
+      {currentLocation.map((path, i, arr) => {
         const newPath = path.split('-').map(p => (
           p.charAt(0).toUpperCase() + p.slice(1)
         )).join(' ');
-
+        
+        
         localPath += `/${path}`;
+
+        if (i === arr.length - 1) {
+          return (
+            <React.Fragment key={getId()}>
+            <img
+              className="breadcrumbs__arrow"
+              src="img/icons/arrow-right.svg"
+              alt="Arrow right"
+            />
+
+            <Link
+              to={localPath}
+              className={cn(
+                'breadcrumbs__path',
+                {
+                  'breadcrumbs__path--active': localPath === location.pathname,
+                },
+              )}
+            >
+              {name}
+            </Link>
+          </React.Fragment>
+          )
+        }
 
         return (
           <React.Fragment key={getId()}>

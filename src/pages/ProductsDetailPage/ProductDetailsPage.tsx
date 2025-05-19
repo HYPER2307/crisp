@@ -1,46 +1,72 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import './ProductDetailsPage.scss';
-import { client } from '../../client/httpClient';
 import { Product } from '../../types/Product';
 import { Loader } from '../../components/Loader/Loader';
 import { ProductPageHeader } from '../../components/ProductPageHeader/ProductPageHeader';
 import { ProductsList } from '../../components/ProductsList/ProductsList';
-import { usePhones } from '../../hooks/usePhones';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectCurrentProduct } from '../../store/currentProduct/selectors';
+import { selectCurrentProduct, selectIsLoading } from '../../store/currentProduct/selectors';
 import { getCurrentProductAsync } from '../../store/currentProduct/actions';
 import { ProductOrder } from '../../components/ProductOrder/ProductOrder';
 import { ProductAbout } from '../../components/ProductAbout/ProductAbout';
 import { ProductSpecs } from '../../components/ProductSpecs/ProductSpecs';
+import { selectProductsData } from '../../store/products/selectors';
+import { getProductsAsync } from '../../store/products/actions';
+import { selectCurrentFertilizer } from '../../store/currentFertilizer/selectors';
+import { selectFertilizersData } from '../../store/fertilizers/selectors';
+import { getCurrentFertilizerAsync } from '../../store/currentFertilizer/actions';
+import { getFertilizersAsync } from '../../store/fertilizers/actions';
+import { PATHNAMES } from '../../constants/routes';
 
 export const ProductDetailsPage: React.FC = () => {
-  const { productId = '' } = useParams();
+  const { productId = '', productType = '' } = useParams();
 
-  const {
-    products,
-
-  } = usePhones();
+  const location = useLocation();  
 
   const dispatch = useAppDispatch();
-  const currentProduct = useAppSelector(selectCurrentProduct) ?? {} as Product
+  const isLoading = useAppSelector(selectIsLoading)
+  const currentProduct = useAppSelector(selectCurrentProduct) || {} as Product
+  const currentFertilizer = useAppSelector(selectCurrentFertilizer) || {} as Product
+  const productsData = useAppSelector(selectProductsData);
+  const fertilizersData = useAppSelector(selectFertilizersData);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const products = productsData?.data;
+  const fertilizers = fertilizersData?.data;
+
+  console.log(currentFertilizer, );
+  
 
   useEffect(() => {
-    dispatch(getCurrentProductAsync({ productId }))
-  }, [dispatch, productId]);
+      if (!currentFertilizer.documentId) {
+        dispatch(getCurrentFertilizerAsync({ productId }));
+      }
+      
+      if (!fertilizers) {
+        dispatch(getFertilizersAsync())
+      }
+
+      if (currentProduct) {
+        dispatch(getCurrentProductAsync({ productId }));
+      }
+
+  
+      if (!products) {
+        dispatch(getProductsAsync())
+      }
+
+    
+  }, [dispatch, productId, productType, fertilizers, products]);
 
   const getSuggestedProducts = (productsList: Product[]): Product[] => {
-    if (!currentProduct) return [];
+    // if (!currentProduct) return [];
 
-    return productsList.filter(
+    return productsList?.filter(
       item =>
-        item.category === 'plants' &&
-        item.id !== currentProduct.id &&
-        item.color === currentProduct.color
-    ).slice(0, 4);
+        item.categoryId === 'plants'
+      && item.productId !== currentProduct.productId
+    );
   };
 
   if (isLoading) {
@@ -49,12 +75,14 @@ export const ProductDetailsPage: React.FC = () => {
 
   const {
     name = '',
-    mainImage = '',
+    mainImage,
     descriptionTitle = '',
     descriptionText=''
-
   } = currentProduct;
   
+  console.log(getSuggestedProducts(products as Product []));
+
+  const product = currentFertilizer || currentProduct
 
   return (
     <>
@@ -71,7 +99,7 @@ export const ProductDetailsPage: React.FC = () => {
 
             <div className="product__content">
               <div className="product__photo">
-                <img src={mainImage} alt={name} className="product__image" />
+                <img src={'http://localhost:1337' + mainImage?.url} alt={mainImage?.alternativeText} className="product__image" />
               </div>
               {/* <ProductPagePhotos
                 images={images}
@@ -94,8 +122,8 @@ export const ProductDetailsPage: React.FC = () => {
               />
 
               <ProductsList
-                products={getSuggestedProducts(products)}
-                title="You also may like"
+                products={getSuggestedProducts(products || [])}
+                title="Вам також може сподобатись"
               />
             </div>
           </>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
@@ -6,11 +6,12 @@ import './ProductItem.scss';
 import { Product } from '../../types/Product';
 import { Button } from '../Button/Button';
 import { usePhones } from '../../hooks/usePhones';
+import { IFertilizer } from '../../types/Fertilizers';
+import { isProduct } from '../../services/checkIsProduct';
 
 type Props = {
-  product: Product
+  product: Product | IFertilizer
 };
-
 export const ProductItem: React.FC<Props> = ({
   product,
 }) => {
@@ -27,21 +28,21 @@ export const ProductItem: React.FC<Props> = ({
     name,
     price,
     fullPrice,
-    size,
-    color,
     category,
     documentId,
   } = product;
 
+  const isFertilizer = !isProduct(product);
+
   const isCartItem = cartProducts.find(({ id }) => id === productId);
 
-  const productDetailsLink = `/product/${documentId}`;
+  const productDetailsLink = isFertilizer ? `/product/${documentId}?productType=fertilizer` : `/product/${documentId}`;
 
   return (
     <div className="product-item">
       <Link to={productDetailsLink}>
         <div className="product-item__img">
-          <img src={mainImage} alt={productId} />
+          <img src={'http://localhost:1337' + mainImage?.url} alt={mainImage?.alternativeText} />
         </div>
       </Link>
 
@@ -67,21 +68,22 @@ export const ProductItem: React.FC<Props> = ({
       <div className="product-item__descr">
         <div className="product-item__descr-wrapper">
           <p className="product-item__descr-name">
-            Розмір
+            {isFertilizer ? 'Обʼєм' : 'Розмір'}
           </p>
 
           <p className="product-item__descr-value">
-            {size}
+            {isFertilizer ? product.volume : product.size  }
           </p>
         </div>
 
         <div className="product-item__descr-wrapper">
           <p className="product-item__descr-name">
-            Колір
+            {isFertilizer ? 'Тип' : 'Колір'}
           </p>
 
           <p className="product-item__descr-value">
-            {color}
+          {isFertilizer ? product.type : product.color}
+
           </p>
         </div>
 

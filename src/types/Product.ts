@@ -22,7 +22,10 @@ export interface Product {
   "fullPrice": number,
   category: string;
   categoryId: string;
-  mainImage: string;
+  mainImage: {
+    alternativeText: string;
+    url: string;
+  };
 }
 
 export interface IProductResponse {

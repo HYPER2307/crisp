@@ -8,7 +8,7 @@ export const getProductsAsync = createAsyncThunk(
   `${PRODUCTS_SLICE_NAME}/fetchProducts`,
   async () => {
     try {
-      const { data } = await instance.get<IProductResponse>('products')
+      const { data } = await instance.get<IProductResponse>('products?populate=*')
 
       return data;
     } catch (error) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import './Plants.scss';
+import './Flowers.scss';
 import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
 import { usePhones } from '../../hooks/usePhones';
 import { Pagination } from '../../components/Pagination/Pagination';
@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { selectProductsData } from '../../store/products/selectors';
 import { getProductsAsync } from '../../store/products/actions';
 
-export const Plants: React.FC = () => {
+export const Flowers: React.FC = () => {
   const {
     sortParams,
     perPageParams,
@@ -54,7 +54,7 @@ export const Plants: React.FC = () => {
 
   const filteredProducts = getSortedProducts()
     .filter(product =>
-      product.name.toLowerCase().includes(searchValue.toLowerCase()) && product.categoryId === 'plants'
+      product.name.toLowerCase().includes(searchValue.toLowerCase()) && product.categoryId === 'flowers'
     );
 
   const productsLength = filteredProducts?.length;
@@ -82,10 +82,10 @@ export const Plants: React.FC = () => {
       {!isLoading && (
         <>
           <div className="plants__breadcrumbs">
-            <Breadcrumbs name='Вазони' />
+            <Breadcrumbs name='Квіти' />
           </div>
 
-          <h1 className="content__title">Вазони</h1>
+          <h1 className="content__title">Квіти</h1>
 
           <p className="plants__count">
             {`${productsLength} рослин знайдено`}

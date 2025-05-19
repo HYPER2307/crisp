@@ -7,13 +7,14 @@ import { PhonesProvider } from './storage/phonesContext';
 import {
   ProductDetailsPage,
 } from './pages/ProductsDetailPage/ProductDetailsPage';
-import { Tablets } from './pages/Tablets/Tablets';
+import { Flowers, Tablets } from './pages/Flowers/Flowers';
 import { Accessories } from './pages/Accessories/Accessories';
 import { Favorites } from './pages/Favorites/Favorites';
 import { Cart } from './pages/Cart/Cart';
 import { PageNotFound } from './components/PageNotFound/PageNotFound';
 import { Checkout } from './components/Checkout/Checkout';
 import { PATHNAMES } from './constants/routes';
+import { Fertilizers } from './pages/Fertilizers/Fertilizers';
 
 export const Root: React.FC = () => (
   <PhonesProvider>
@@ -23,8 +24,8 @@ export const Root: React.FC = () => (
           <Route index element={<Home />} />
           <Route path={PATHNAMES.PLANTS} element={<Plants />} />
           <Route path={PATHNAMES.PRODUCT_DETAILS} element={<ProductDetailsPage />} />
-          <Route path={PATHNAMES.FLOWERS} element={<Tablets />} />
-          <Route path={PATHNAMES.FERTILIZERS} element={<Accessories />} />
+          <Route path={PATHNAMES.FLOWERS} element={<Flowers />} />
+          <Route path={PATHNAMES.FERTILIZERS} element={<Fertilizers />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path={PATHNAMES.CART} element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />

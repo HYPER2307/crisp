@@ -13,7 +13,7 @@ export const ProductPageHeader: React.FC<Props> = ({
   return (
     <>
       <div className="product__breadcrumbs">
-        <Breadcrumbs />
+        <Breadcrumbs name={productName} />
       </div>
 
       <ButtonBack />
