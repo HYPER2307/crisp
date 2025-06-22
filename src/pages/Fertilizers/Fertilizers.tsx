@@ -10,8 +10,6 @@ import { Loader } from '../../components/Loader/Loader';
 import { SortType } from '../../types/SortType';
 import { PhonesList } from '../../components/PhonesList/PhonesList';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectProductsData } from '../../store/products/selectors';
-import { getProductsAsync } from '../../store/products/actions';
 import { selectFertilizersData } from '../../store/fertilizers/selectors';
 import { getFertilizersAsync } from '../../store/fertilizers/actions';
 
@@ -19,8 +17,6 @@ export const Fertilizers: React.FC = () => {
   const {
     sortParams,
     perPageParams,
-    // products,
-    setProducts,
   } = usePhones();
 
   const [searchParams] = useSearchParams();
@@ -80,7 +76,7 @@ export const Fertilizers: React.FC = () => {
       {!isLoading && (
         <>
           <div className="plants__breadcrumbs">
-            <Breadcrumbs name='Добриво' />
+            <Breadcrumbs name='Добриво' path='' />
           </div>
 
           <h1 className="content__title">Добриво</h1>

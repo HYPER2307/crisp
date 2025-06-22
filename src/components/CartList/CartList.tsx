@@ -3,9 +3,10 @@ import { v4 as getId } from 'uuid';
 
 import { CartItem } from '../CartItem/CartItem';
 import { Product } from '../../types/Product';
+import { IFertilizer } from '../../types/Fertilizers';
 
 type Props = {
-  cartItems: Product[],
+  cartItems: (Product | IFertilizer)[],
 };
 
 export const CartList: React.FC<Props> = ({
@@ -17,7 +18,7 @@ export const CartList: React.FC<Props> = ({
         cartItems.map(item => (
           <CartItem
             key={getId()}
-            item={item}
+            item={item as Product}
           />
         ))
       }

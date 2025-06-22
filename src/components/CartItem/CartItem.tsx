@@ -17,13 +17,13 @@ export const CartItem: React.FC<Props> = ({
     minusCartItem,
   } = usePhones();
   const {
-    image,
+    mainImage,
     name,
     price,
-    itemId,
+    productId,
   } = item;
 
-  const count = getProductCount(itemId);
+  const count = getProductCount(productId);
 
   const localPrice = count * price;
 
@@ -36,13 +36,13 @@ export const CartItem: React.FC<Props> = ({
           button__remove-item
           cart__remove-btn
         "
-          onClick={() => removeCartItem(itemId)}
+          onClick={() => removeCartItem(productId)}
         >
           <img src="img/icons/close.svg" alt="Cross" />
         </Button>
 
         <div className="cart__item-img">
-          <img src={image.replace('../', '')} alt="Phone" />
+          <img src={'http://localhost:1337' + mainImage.url} alt="Phone" />
         </div>
 
         <div className="cart__item-title">
@@ -61,13 +61,13 @@ export const CartItem: React.FC<Props> = ({
             cart__item-minus
           "
             disabled={count <= 1}
-            onClick={() => minusCartItem(itemId)}
+            onClick={() => minusCartItem(productId)}
           >
             <img src="img/icons/minus.svg" alt="Minus" />
           </Button>
 
           <div className="cart__item-count">
-            {getProductCount(itemId)}
+            {getProductCount(productId)}
           </div>
 
           <Button
@@ -78,14 +78,14 @@ export const CartItem: React.FC<Props> = ({
             button__nav
             cart__item-plus
           "
-            onClick={() => plusCartItem(itemId)}
+            onClick={() => plusCartItem(productId)}
           >
             <img src="img/icons/plus.svg" alt="Plus" />
           </Button>
         </div>
 
         <div className="cart__item-total-price">
-          {`$${localPrice}`}
+          {`${localPrice} грн.`}
         </div>
       </div>
     </div>

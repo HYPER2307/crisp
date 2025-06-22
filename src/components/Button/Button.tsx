@@ -40,7 +40,7 @@ export const ButtonBack: React.FC = () => {
       <img src="img/icons/arrow-left.svg" alt="Arrow Left" />
 
       <p>
-        Back
+        Назад
       </p>
     </Button>
   );

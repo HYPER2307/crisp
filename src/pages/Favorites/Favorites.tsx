@@ -7,21 +7,44 @@ import './Favorites.scss';
 import { client } from '../../client/httpClient';
 import { Product } from '../../types/Product';
 import { Loader } from '../../components/Loader/Loader';
+import { selectProductsData } from '../../store/products/selectors';
+import { selectFertilizersData } from '../../store/fertilizers/selectors';
+import { getProductsAsync } from '../../store/products/actions';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { getFertilizersAsync } from '../../store/fertilizers/actions';
 
 export const Favorites: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { favoritesIds, setProducts, products } = usePhones();
+  const { favoritesIds, setProducts } = usePhones();
 
-  useEffect(() => {
-    setIsLoading(true);
+  const flowersData = useAppSelector(selectProductsData);
+   const fertilizersData = useAppSelector(selectFertilizersData);
+ 
+   const dispatch = useAppDispatch();
+ 
+   const { data: flowers } = flowersData || { data: [] }
+   const { data: fertilizers } = fertilizersData || { data: [] }
+ 
+ 
+   console.log(flowersData, fertilizersData);
+   
 
-    client.get<Product[]>('products.json')
-      .then(setProducts)
-      .finally(() => setIsLoading(false));
-  }, [setProducts]);
+ 
+   useEffect(() => {
+     // setIsLoading(true);
+ 
+     if (!flowersData) {
+       dispatch(getProductsAsync())
+     }
+     if (!fertilizersData) {
+       dispatch(getFertilizersAsync())
+     }
+   }, [dispatch, setProducts, flowersData, fertilizersData]);
+ 
+   const products = [...flowers, ...fertilizers]
 
-  const favoritesProducts = products.filter(({ itemId }) => {
-    return favoritesIds.includes(itemId);
+  const favoritesProducts = products.filter(({ productId }) => {
+    return favoritesIds.includes(productId);
   });
 
   return (
@@ -31,12 +54,12 @@ export const Favorites: React.FC = () => {
       {!isLoading && (
         <>
           <div className="favorites__breadcrumbs">
-            <Breadcrumbs />
+            <Breadcrumbs name='Улюблені' path='' />
           </div>
 
           {!favoritesIds.length && (
             <h1 className="content__title">
-              No products in favorites
+              Немає товарів в улюблених
             </h1>
           )}
 

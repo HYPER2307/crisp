@@ -1,5 +1,23 @@
 @import '../../styles/utils';
 
+.phone_wrapper {
+  width: 100%;
+
+  .phone {
+    width: 300px;
+    height: 40px;
+    border: 1px solid rgb(207, 207, 207);
+    padding: 5px 7px;
+  }
+}
+
+.button_checkout {
+  &:disabled {
+    opacity: 40;
+    // cursor: not-allowed
+  }
+}
+
 .cart {
   position: relative;
   padding: 40px 0 90px;
