@@ -110,7 +110,7 @@ export const ProductItem: React.FC<Props> = ({
           )}
           onClick={() => handleOnCartAdd(productId)}
         >
-          {isCartItem ? 'Added to cart' : 'Add to card'}
+          {isCartItem ? 'Додано в корзину' : 'Додати в корзину'}
         </Button>
 
         <Button

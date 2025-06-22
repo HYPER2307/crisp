@@ -1,17 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Categories.scss';
 import { Product } from '../../types/Product';
 import { PATHNAMES } from '../../constants/routes';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { selectProductsData } from '../../store/products/selectors';
+import { selectFertilizersData } from '../../store/fertilizers/selectors';
+import { getProductsAsync } from '../../store/products/actions';
+import { getFertilizersAsync } from '../../store/fertilizers/actions';
 
 type Props = {
   products: Product[] 
 };
 
-export const Categories: React.FC<Props> = ({
-  products,
-}) => {
+export const Categories: React.FC<Props> = () => {
+  const productsData = useAppSelector(selectProductsData);
+  const fertilizersData = useAppSelector(selectFertilizersData);
+
+  const { data: products } = productsData || { data: [] }
+  const { data: fertilizers } = fertilizersData || { data: [] }
+
+  const dispatch = useAppDispatch();
+
+  const noFlowers = [...products].filter(({ categoryId }) => categoryId === 'plants')
+
+  const flowers = [...products].filter(({ categoryId }) => categoryId === 'flowers');
+
+
+
+  console.log(fertilizers);
+  
+
+  useEffect(() => {
+    if (!productsData) {
+      dispatch(getProductsAsync());
+    }
+
+    if (!fertilizersData) {
+      dispatch(getFertilizersAsync());
+    }
+  }, [dispatch, productsData, fertilizersData]);
+
   return (
     <>
       <h1 className="section__title categories__title">
@@ -37,7 +67,7 @@ export const Categories: React.FC<Props> = ({
           </Link>
 
           <p className="categories__count">
-            {`${products?.length} models`}
+            {`${noFlowers?.length} товари`}
           </p>
         </div>
 
@@ -59,7 +89,7 @@ export const Categories: React.FC<Props> = ({
           </Link>
 
           <p className="categories__count">
-            0 models
+          {`${flowers?.length} товари`}
           </p>
         </div>
 
@@ -81,7 +111,7 @@ export const Categories: React.FC<Props> = ({
           </Link>
 
           <p className="categories__count">
-            0 models
+            {`${fertilizers?.length} товари`}
           </p>
         </div>
       </div>

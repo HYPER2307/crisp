@@ -16,7 +16,6 @@ import { getProductsAsync } from '../../store/products/actions';
 export const Home: React.FC = () => {
   const {
     setProducts,
-    preparedHotPriceProducts,
     // products,
   } = usePhones();
 
@@ -40,6 +39,8 @@ export const Home: React.FC = () => {
   console.log(products);
   
 
+  const preparedProducts = products?.filter(({ fullPrice, price }) => (fullPrice - price) >= 100) || []
+
   if (isLoading) {
     return <Loader />;
   }
@@ -57,7 +58,7 @@ export const Home: React.FC = () => {
 
       <section className="section hot-prices home__hot-prices">
         <ProductsList
-          products={preparedHotPriceProducts}
+          products={preparedProducts}
           title="Гарячі знижки"
         />
       </section>
